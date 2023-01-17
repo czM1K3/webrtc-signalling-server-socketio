@@ -1,0 +1,8 @@
+{
+	"imports": {
+		"std": "https://deno.land/std@0.173.0",
+		"std/": "https://deno.land/std@0.173.0/",
+		"socketio": "https://deno.land/x/socket_io@0.2.0/mod.ts",
+		"zod": "https://deno.land/x/zod@v3.20.2/mod.ts"
+	}
+}

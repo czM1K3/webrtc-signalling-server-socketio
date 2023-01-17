@@ -1,0 +1,12 @@
+{
+	"tasks": {
+		"dev": "deno run --allow-net --watch src/index.ts"
+	},
+	"importMap": "./import_map.json",
+	"fmt": {
+		"options": {
+			"useTabs": true,
+			"indentWidth": 1
+		}
+	}
+}
