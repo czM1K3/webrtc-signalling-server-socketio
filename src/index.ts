@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
 		try {
 			const parsedMessage = JSON.parse(message);
 			const data = incommingMessageSchema.parse(parsedMessage);
-			
+
 			const out: outgoingMessageType = {
 				message: data.message,
 				sourceId: socket.id,
@@ -35,8 +35,7 @@ io.on("connection", (socket) => {
 			};
 
 			const target = io.of("/").sockets.get(data.targetId);
-			if (!target)
-				throw new Error("Client not found");
+			if (!target) throw new Error("Client not found");
 			target.emit("message", JSON.stringify(out));
 		} catch (_e) {
 			// console.log(e.message);
