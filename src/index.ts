@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const io = new Server({
 	cors: {
-		origin: "*",
+		origin: Deno.env.get("CORS_ORIGIN") ?? "*",
 	},
 });
 
