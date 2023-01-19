@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const io = new Server({
 	cors: {
-		origin: Deno.env.get("CORS_ORIGIN") ?? "*",
+		origin: (Deno.env.get("CORS_ORIGIN") ?? "*").split("|"),
 	},
 });
 
@@ -15,7 +15,7 @@ type outgoingMessageType = {
 };
 
 const incommingMessageSchema = z.object({
-	targetId: z.string(),
+	targetId: z.string().length(20),
 	message: z.string(),
 	type: z.string(),
 });
