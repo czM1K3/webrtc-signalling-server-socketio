@@ -4,7 +4,7 @@ import { z } from "zod";
 
 const io = new Server({
 	cors: {
-		origin: (Deno.env.get("CORS_ORIGIN") ?? "*").split("|"),
+		origin: Deno.env.get("CORS_ORIGIN")?.split("|") ?? "*",
 	},
 });
 
@@ -43,6 +43,17 @@ io.on("connection", (socket) => {
 	});
 });
 
-await serve(io.handler(), {
+const otherHandler = (req: Request) => {
+	const url = new URL(req.url);
+	if (url.pathname === "/stats") {
+		const res = {
+			connected: io.of("/").sockets.size,
+		};
+		return new Response(JSON.stringify(res));
+	}	
+	return new Response(null, { status: 404 });
+};
+
+await serve(io.handler(otherHandler), {
 	port: 3000,
 });
